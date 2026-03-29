@@ -1,13 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package aemet.eventos;
 
-/**
- *
- * @author Sergio
- */
+import aemet.estados.EstadoGravedad;
+
 public abstract class EventoMeteorologico {
+    
+    // Protected para que las clases hijas puedan acceder a ellos
+    protected String datosCrudos;
+    protected EstadoGravedad estado;
+    
+    // Constructor
+    public EventoMeteorologico(String datosCrudos) {
+        this.datosCrudos = datosCrudos;
+    }
+
+    // Método para cambiar el Estado (Patrón State)
+    public void setEstado(EstadoGravedad e) {
+        this.estado = e;
+    }
+    
+    public EstadoGravedad getEstado() {
+        return this.estado;
+    }
+
+    // Método que cada hijo implementará a su manera
+    public abstract void procesarEvento();
     
 }
