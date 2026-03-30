@@ -12,6 +12,7 @@ public class EventoLluvia extends EventoMeteorologico {
     public void procesarEvento() {
         System.out.println("Procesando datos de LLUVIA: " + datosCrudos + " mm/h");
         
+        // Ejemplo
         try {
             double milimetros = Double.parseDouble(this.datosCrudos);
             
