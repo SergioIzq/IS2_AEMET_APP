@@ -2,6 +2,7 @@ package aemet.usuarios;
 
 import aemet.eventos.EventoMeteorologico;
 import aemet.filtros.FiltroPreferencias;
+import aemet.mensajes.MensajeAlerta;
 import java.util.List;
 
 /**
