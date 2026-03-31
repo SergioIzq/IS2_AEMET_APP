@@ -9,5 +9,5 @@ package aemet.comandos;
  * @author Sergio
  */
 public interface ComandoAccion {
-    
+    void ejecutar();
 }

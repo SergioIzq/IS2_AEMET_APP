@@ -6,8 +6,12 @@ package aemet.notificacion;
 
 /**
  *
- * @author Sergio
+ * @author fecre
  */
-public interface EstrategiaNotificacion {
-    void enviar(String texto);
+public class NotificacionApp implements EstrategiaNotificacion {
+
+    @Override
+    public void enviar(String texto) {
+        System.out.println("[APP] " + texto);
+    }
 }
