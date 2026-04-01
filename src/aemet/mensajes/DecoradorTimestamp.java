@@ -3,25 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package aemet.mensajes;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author luque
  */
+public class DecoradorTimestamp extends DecoradorAlerta {
 
-//El objeto concreto que decoraremos añadiendo la localización de la alerta
-// o bien el momento
-public class AlertaBase implements MensajeAlerta{
-    
-    private String textoOriginal;
-    
-    public AlertaBase(String texto){
-        this.textoOriginal=texto;
+    public DecoradorTimestamp(MensajeAlerta alerta) {
+        super(alerta);
     }
 
     @Override
     public String getContenido() {
-        return textoOriginal;
+        return super.getContenido() + "Fecha: " + LocalDateTime.now();
     }
-    
 }

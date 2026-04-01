@@ -8,6 +8,8 @@ package aemet.mensajes;
  *
  * @author luque
  */
+
+//Interfaz para los mensajes de alerta
 public interface MensajeAlerta {
     
     public String getContenido();
