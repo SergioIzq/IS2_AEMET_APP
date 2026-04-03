@@ -3,7 +3,10 @@ package aemet.aplicacion;
 import aemet.eventos.EventoMeteorologico;
 import aemet.usuarios.Suscrito;
 import aemet.comandos.ComandoAccion;
-// import aemet.mensajes.MensajeAlerta;
+import aemet.filtros.FiltroPreferencias;
+import aemet.mensajes.AlertaBase;
+import aemet.mensajes.DecoradorTimestamp;
+import aemet.mensajes.MensajeAlerta;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,18 +50,23 @@ public class GestorAemet {
     public void notificar(EventoMeteorologico e) {
         historicoEventos.add(e);
 
-        // Aquí se generaría el mensaje de alerta (Patrón Decorator/State)
-        // MensajeAlerta mensaje = ...
+        // Construimos el mensaje usando el Patrón State (encabezado) + Decorator (timestamp)
+        String encabezado = (e.getEstado() != null) ? e.getEstado().formatearEncabezado() : "[ALERTA] ";
+        String texto = encabezado + e.getClass().getSimpleName() + " - Datos: " + e.getDatos() + "\n";
+        MensajeAlerta mensaje = new DecoradorTimestamp(new AlertaBase(texto));
 
-        // Recorremos la lista y avisamos a cada usuario suscrito
+        // Recorremos la lista y avisamos a cada suscriptor que cumpla sus filtros
         for (Suscrito s : suscriptores) {
-            // Pasamos null temporalmente hasta que se implemente la creación del mensaje
-            s.actualizar(null, e); 
+            List<FiltroPreferencias> filtros = s.getFiltros();
+            boolean pasa = filtros.isEmpty() || filtros.stream().allMatch(f -> f.cumple(e));
+            if (pasa) {
+                s.actualizar(mensaje, e);
+            }
         }
     }
 
     // Métodos del patrón Command
     public void ejecutarComando(ComandoAccion c) {
-        // c.ejecutar();
+        c.ejecutar();
     }
 }

@@ -18,7 +18,8 @@ public abstract class DecoradorAlerta implements MensajeAlerta {
         this.alertaEnvuelta = alerta;
     }
 
-    public String getConenido(){
+    @Override
+    public String getContenido() {
         return alertaEnvuelta.getContenido();
     }
     
